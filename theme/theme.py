@@ -1,0 +1,13 @@
+MAIN_FONT = "MS Reference Sans Serif Regular"
+BLUE = "#122D68"
+WHITE = "#FFFFFF"
+DARK_YELLOW = "#F2AD00"
+DARK_YELLOW_ACTIVE ="#D19705"
+DARK_YELLOW_HOVER = "#EBB840"
+TRANSPARENT = '#ab23ff'
+CREAMY_WHITE = "#FFF5EC"
+BLACK = 'black'
+RED = 'red'
+GRAY = "#F2F2F2"
+
+GREEN = 'green'

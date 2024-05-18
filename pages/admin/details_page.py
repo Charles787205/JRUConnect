@@ -78,6 +78,10 @@ class BookingDetails(tk.Frame):
       cancel_button.grid(row=0, column=1, padx=10, pady=10, columnspan=1, sticky="e")
       approved_button = tk.Button(button_frame, text="Accept", font=(MAIN_FONT, 20), bg=BLUE, fg=WHITE, borderwidth=0, cursor="hand2", command=lambda: self.on_approve_clicked(self.reservation))
       approved_button.grid(row=0, column=2, padx=10, pady=10, columnspan=1, sticky="e")
+    else:
+      delete_button = tk.Button(button_frame, text="Delete", font=(MAIN_FONT, 20), bg=RED, fg=WHITE, borderwidth=0, cursor="hand2", command=lambda: self.on_delete_clicked(self.reservation))
+      delete_button.grid(row=0, column=1, padx=10, pady=10, columnspan=1, sticky="e")
+
     button_frame.grid(row=7, column=4, padx=10, pady=10, columnspan=2, sticky="e")
     self.inner_frame.pack()
 
@@ -99,7 +103,10 @@ class BookingDetails(tk.Frame):
     self.parent.app.nav_to_admin_page()
     pass
 
-  
+  def on_delete_clicked(self, reservation):
+    reservation.delete()
+    messagebox.showinfo("Reservation Deleted", "Reservation has been deleted.")
+    self.parent.app.nav_to_admin_page()
 
   
 

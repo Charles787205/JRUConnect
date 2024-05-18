@@ -6,6 +6,7 @@ USE jru_connect_db;
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    
     first_name VARCHAR(255) NOT NULL,
     middle_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
@@ -18,6 +19,7 @@ CREATE TABLE users (
 
 CREATE TABLE students (
     id INT NOT NULL PRIMARY KEY,
+    student_number VARCHAR(255) NOT NULL,
     course VARCHAR(255) NOT NULL,
     year_level INT NOT NULL,
     FOREIGN KEY (id) REFERENCES users(id)
@@ -50,5 +52,7 @@ CREATE TABLE reservations (
 
 
 
-    INSERT INTO facilities (name, image_url, seating_capacity, location) VALUES ('New Auditorium', 'new_auditorium.png', 500, 'Centennial Building 9th Floor'), ('Old Auditorium', 'old_auditorium.png', 1000, 
-    'Main Campus'), ('Learning Commons', 'learning_commons.png', 2000, 'Main Campus'), ('Information Commons', 'information_commons.png', 200,'Centennial Building 2nd Floor');
+INSERT INTO facilities (name, image_url, seating_capacity, location) VALUES ('New Auditorium', 'new_auditorium.png', 500, 'Centennial Building 9th Floor'), ('Old Auditorium', 'old_auditorium.png', 1000, 
+'Main Campus'), ('Learning Commons', 'learning_commons.png', 2000, 'Main Campus'), ('Information Commons', 'information_commons.png', 200,'Centennial Building 2nd Floor');
+
+INSERT INTO users (first_name, middle_name, last_name, email, password, user_type) VALUES ('John', 'Doe', 'Smith', 'johndoe@gmail.com', SHA2('password',256), 'ADMIN');

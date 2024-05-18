@@ -24,7 +24,7 @@ class HomePage(tk.Frame) :
 
   def add_profile_section(self):
     
-    profile = ProfileSection(self, self.user.get_full_name().title(), f"%dth Year" % self.user.year_level, self.user.course)
+    profile = ProfileSection(self, self.user.get_full_name().title(), f"%dth Year" % self.user.year_level, self.user.course, self.user.student_number)
     profile.pack(pady=20)
     frame = tk.Frame(self, bg="gray", height=2)
     frame.pack(fill=tk.X)

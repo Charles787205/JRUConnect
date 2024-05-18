@@ -86,4 +86,6 @@ class AddFacilityPage(Frame):
     facility = Facility(name=name, location=location, seating_capacity=capacity, image_url=image_url)
     facility.save()
     messagebox.showinfo("Facility Added", "Facility has been added successfully")
-    self.parent.app.on_facilities_clicked()
+    
+    self.parent.app.admin_on_facilities_clicked()
+    self.destroy()

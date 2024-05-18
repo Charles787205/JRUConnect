@@ -21,13 +21,13 @@ class User(DatabaseModel):
     mycursor = self.mydb.cursor()
     query = "INSERT INTO users (first_name, middle_name, last_name, email, password, user_type) VALUES (%s, %s, %s, %s, %s, %s)"
     values = (self.first_name, self.middle_name, self.last_name, self.email, self.hash_string(self.password), self.user_type)
-    if(self.check_register_info()):
-      mycursor.execute(query, values)
-      self.mydb.commit()
-      self.id = mycursor.lastrowid
-      
-      return self.id
+    
+    mycursor.execute(query, values)
+    self.mydb.commit()
+    self.id = mycursor.lastrowid
+    
     self.mydb.close()
+    return self.id
     
 
   def check_register_info(self) -> bool:

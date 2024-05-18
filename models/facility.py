@@ -54,4 +54,6 @@ class Facility(DatabaseModel):
     mycursor.execute(query, values)
     self.mydb.commit()
     self.mydb.close()
+
+  
     

@@ -35,6 +35,7 @@ class Reservation(DatabaseModel):
     mycursor = self.mydb.cursor(dictionary=True)
     query = "INSERT INTO reservations (facility_id, user_id, date_reserved, time_from, time_to, notes) VALUES (%s,%s, %s,%s,%s,%s)"
 
+    print("student id = ", self.student_id)
     values = (self.facility_id, self.student_id, self.date_reserved, self.time_from, self.time_to, self.notes)
     mycursor.execute(query, values)
     self.mydb.commit()
@@ -114,6 +115,18 @@ class Reservation(DatabaseModel):
     mycursor = self.mydb.cursor(dictionary=True)
     query = "UPDATE reservations SET status = %s WHERE id = %s"
     values = (status, self.id)
+    mycursor.execute(query, values)
+    self.mydb.commit()
+    self.mydb.close()
+    return True
+  
+
+  def delete(self):
+    if(self.mydb == None):
+      self.connect_db()
+    mycursor = self.mydb.cursor(dictionary=True)
+    query = "DELETE FROM reservations WHERE id = %s"
+    values = (self.id,)
     mycursor.execute(query, values)
     self.mydb.commit()
     self.mydb.close()

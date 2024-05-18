@@ -25,15 +25,9 @@ class RegisterPage(tk.Frame):
     
     input_frame = tk.Frame(self, bg=WHITE)
 
-    options = ['ADMIN', 'STUDENT']
+  
 
-
-
-    self.user_type =  tk.StringVar()
-    self.user_type.set('STUDENT')
-    user_type_dropdown = tk.OptionMenu(input_frame, self.user_type, *options, command=lambda x: on_usertype_select())
-    user_type_dropdown.config(font=(MAIN_FONT, 15), bg=WHITE, fg=BLUE, borderwidth=2, width=20)
-    user_type_dropdown.grid(row=0, column=0, padx=10, pady=10, columnspan=3)
+    
 
     first_name_label = tk.Label(input_frame, text="First Name", font=(MAIN_FONT, 15), bg=WHITE, fg=BLUE)
     first_name_entry = tk.Entry(input_frame, font=(MAIN_FONT, 15), fg=BLUE, borderwidth=2)
@@ -79,6 +73,12 @@ class RegisterPage(tk.Frame):
     year_level_label.grid(row=5, column=2, padx=10, pady=10)
     year_level_entry.grid(row=6, column=2, padx=10)
 
+    student_number_label = tk.Label(input_frame, text="Student Number", font=(MAIN_FONT, 15), bg=WHITE, fg=BLUE)
+    student_number_entry = tk.Entry(input_frame, font=(MAIN_FONT, 15), fg=BLUE, borderwidth=2)
+    student_number_label.grid(row=7, column=0, padx=10, pady=10)
+    student_number_entry.grid(row=8, column=0, padx=10)
+
+
     def on_register_clicked():
       first_name = first_name_entry.get()
       middle_name = middle_name_entry.get()
@@ -88,14 +88,13 @@ class RegisterPage(tk.Frame):
       password = password_entry.get()
       confirm_password = confirm_password_entry.get()
       year_level = year_level_entry.get()
-      user_type = self.user_type.get()
+      student_number = student_number_entry.get()
+
       
       print(first_name, middle_name, last_name, email, course, password, confirm_password, year_level)
-      if(user_type == 'STUDENT'):
-        user = Student(first_name=first_name, middle_name=middle_name, last_name=last_name, email=email, course=course, password=password, confirm_password=confirm_password, year_level=year_level, user_type=user_type)
-      else:
-        user = User(first_name=first_name, middle_name=middle_name, last_name=last_name, email=email,  password=password, confirm_password=confirm_password, user_type=user_type)
-        
+    
+      user = Student(first_name=first_name, middle_name=middle_name, last_name=last_name, email=email, course=course, password=password, confirm_password=confirm_password, year_level=year_level, user_type=User.STUDENT, student_number=student_number)
+     
       register_info = user.check_register_info()
       if(register_info[0]):
         user.id = user.add_user()
@@ -109,17 +108,7 @@ class RegisterPage(tk.Frame):
         error_message = tk.Label(self, text=register_info[1], font=(MAIN_FONT, 15), bg=WHITE, fg='red', name='error_message')
         error_message.pack(before=button)
         
-    def on_usertype_select():
-      if(self.user_type.get() == 'STUDENT'):
-        year_level_label.grid(row=5, column=2, padx=10, pady=10)
-        year_level_entry.grid(row=6, column=2, padx=10)
-        course_label.grid(row=3, column=2, padx=10, pady=10,columnspan=1)
-        course_entry.grid(row=4, column=2, padx=10,columnspan=1)
-      else:
-        year_level_label.grid_forget()
-        year_level_entry.grid_forget()
-        course_label.grid_forget()
-        course_entry.grid_forget()
+   
 
     input_frame.pack(pady=20)
     button = tk.Button(self, text="Register", bg=BLUE, fg=DARK_YELLOW, font=(MAIN_FONT, 15), borderwidth=0, cursor="hand2",padx=20, pady=3, command=on_register_clicked)
@@ -134,7 +123,7 @@ class RegisterPage(tk.Frame):
   
     
   def on_back_clicked(self):
-    login_page = login.LoginPage(self.parent)
+    login_page = login.LoginPage(self.parent, on_login_clicked=self.parent.app.on_login_clicked) 
     login_page.place(relx=.5, rely=.5, anchor='center')
     self.place_forget()
 

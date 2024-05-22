@@ -1,6 +1,15 @@
 import tkinter as tk
 import theme as theme
+import os
 from PIL import Image, ImageTk
+def resource_path(relative):
+    return os.path.join(
+        os.environ.get(
+            "_MEIPASS2",
+            os.path.abspath(".")
+        ),
+        relative
+    )
 class Navbar(tk.Frame):
   LOGO_SIZE = 110
   
@@ -23,7 +32,7 @@ class Navbar(tk.Frame):
     header.pack(side="left", padx=10, pady=10)
 
   def add_image(self):
-    image = Image.open("assets/logo.png")  
+    image = Image.open(resource_path("assets/logo.png"))  
     image = image.resize((self.LOGO_SIZE, self.LOGO_SIZE))
     global photo
     
